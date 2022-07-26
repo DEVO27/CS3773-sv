@@ -18,4 +18,4 @@ Throughout this article, I will demonstrate its properties and how it's used.
 to specify the proper directory on your machine and navigate to it either using an IDE or 
 file explorer. Open the application and begin to run maven. Performing this operation will 
 download any and all dependencies needed. Run the program. If you encounter an error this 
-could be because postgre  
+could be because postgre. NEW TEST 
