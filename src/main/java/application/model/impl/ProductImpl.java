@@ -1,6 +1,7 @@
 package application.model.impl;
 
 import application.model.product;
+
 import java.util.Random;
 
 public class ProductImpl implements product {
@@ -9,18 +10,22 @@ public class ProductImpl implements product {
     private Double price;
     private Long iD;
     private String supplier;
+    private final Random rand = new Random();
 
     public ProductImpl(String name, String description, Double price, String supplier) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.iD = generateId();
+        this.iD = rand.nextLong(20000 - 10000) + 10000;
         this.supplier = supplier;
     }
 
-    private Long generateId() {
-        Random rand = new Random();
-        return rand.nextLong(20000 - 10000) + 10000;
+    public Long getiD() {
+        return iD;
+    }
+
+    public void setiD(Long iD) {
+        this.iD = iD;
     }
 
     @Override

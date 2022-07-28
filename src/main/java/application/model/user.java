@@ -10,7 +10,7 @@ public interface user {
 
     void setPassword(String password);
 
-    String getUserName();
+    String getUsername();
 
-    void setUserName(String name);
+    void setUsername(String name);
 }

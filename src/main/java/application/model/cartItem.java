@@ -2,11 +2,11 @@ package application.model;
 
 public interface cartItem {
 
-    public void getProduct();
+    void getProduct();
 
-    public int getQuantity();
+    int getQuantity();
 
-    public void increaseQuantity();
+    void increaseQuantity();
 
-    public void decreaseQuantity();
+    void decreaseQuantity();
 }

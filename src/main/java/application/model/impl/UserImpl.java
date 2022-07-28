@@ -2,17 +2,27 @@ package application.model.impl;
 
 import application.model.user;
 
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public class UserImpl implements user {
     private String name;
-    private String userName;
+    private String username;
     private String password;
 
-    public UserImpl(String name, String userName, String password) {
+    public UserImpl(String name, String username, String password) {
         this.name = name;
-        this.userName = userName;
+        this.username = username;
         this.password = password;
     }
-    public UserImpl() {}
+
+    public UserImpl() {
+    }
+
+    public UserImpl(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public String getName() {
@@ -35,12 +45,12 @@ public class UserImpl implements user {
     }
 
     @Override
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
     @Override
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

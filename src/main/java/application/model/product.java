@@ -1,6 +1,11 @@
 package application.model;
 
 public interface product {
+
+    Long getiD();
+
+    void setiD(Long iD);
+
     String getDescription();
 
     void setDescription(String description);

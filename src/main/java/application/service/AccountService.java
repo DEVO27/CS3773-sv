@@ -5,7 +5,7 @@ import application.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -16,9 +16,15 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    public void findAccount(AccountImpl account) {
+        Optional<AccountImpl> accountOptional = accountRepository.findAccountByUserNamePassword(
+                account.getUsername(),
+                account.getPassword());
 
-    /*** Should call database to find record ***/
-    public List<AccountImpl> findAccount(String userName) {
-        return accountRepository.findAll();
+        if (accountOptional.isPresent()) {
+            throw new IllegalArgumentException();
+        }
+
+        accountRepository.saveAndFlush(account);
     }
 }
