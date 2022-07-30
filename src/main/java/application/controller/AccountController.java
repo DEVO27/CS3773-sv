@@ -1,12 +1,17 @@
 package application.controller;
 
+import application.model.CommonSV.ActionStatus;
+import application.model.CommonSV.ResponseDetail;
 import application.model.impl.AccountImpl;
 import application.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.logging.Logger;
 
@@ -15,36 +20,39 @@ import java.util.logging.Logger;
 public class AccountController {
     private static final Logger logger = Logger.getLogger(AccountController.class.getName());
     private final AccountService accountService;
+    ResponseDetail responseDetail = new ResponseDetail();
 
     @Autowired
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
 
-    @GetMapping("/user/{username}/passphrase/{password}")
-    public ResponseEntity<String> getAccount(@PathVariable("username") @NonNull String username,
+    @GetMapping("/users/{email}/passwords/{password}")
+    public ResponseEntity<String> getAccount(@PathVariable("email") @NonNull String email,
                                              @PathVariable("password") @NonNull String password) {
         HttpStatus httpStatus = HttpStatus.OK;
-        String errorMessage = "All Good";
+        String errorMessage = "";
         try {
-            accountService.findAccount(new AccountImpl(username, password));
+            accountService.findAccount(new AccountImpl(email, password, "4446659827819783"));
         } catch (IllegalArgumentException e) {
-            errorMessage = e.getMessage();
+            errorMessage = e.toString();
             httpStatus = HttpStatus.BAD_REQUEST;
-            logger.info(String.format("There was a problem finding username %s with password %s", username, password));
+            logger.info(String.format("There was a problem finding username %s with password %s", email, password));
         }
+
         return new ResponseEntity<>(errorMessage, httpStatus);
     }
 
-    @PostMapping("/user/{username}/passphrase/{password}/person/{name}")
-    public ResponseEntity<String> registerNewAccount(@PathVariable("username") @NonNull String username,
+    /*@PostMapping("/user/{email}/passphrase/{password}/card/{creditcard}")
+    public ResponseEntity<String> registerNewAccount(@PathVariable("email") @NonNull String email,
                                                      @PathVariable("password") @NonNull String password,
-                                                     @PathVariable("name") @NonNull String name) {
+                                                     @PathVariable("creditCard") @NonNull String creditCard) {
         HttpStatus httpStatus = HttpStatus.OK;
         String errorMessage = "";
 
         try {
-            accountService.findAccount(new AccountImpl(name, username, password));
+
+           // accountService.findAccount(new AccountImpl(name, username, password));
         } catch (IllegalArgumentException e) {
             errorMessage = e.getMessage();
             httpStatus = HttpStatus.BAD_REQUEST;
@@ -52,5 +60,5 @@ public class AccountController {
         }
 
         return new ResponseEntity<>(errorMessage, httpStatus);
-    }
+    } */
 }
