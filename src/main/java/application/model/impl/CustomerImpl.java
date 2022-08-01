@@ -21,7 +21,7 @@ public class CustomerImpl implements customer {
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
-    private String LastName;
+    private String lastName;
     @Column(name = "address")
     private String address;
 
@@ -34,8 +34,14 @@ public class CustomerImpl implements customer {
      */
     public CustomerImpl(String firstName, String lastName, String address) {
         this.firstName = firstName;
-        LastName = lastName;
+        this.lastName = lastName;
         this.address = address;
+        this.iD = new Random().nextLong(200000 - 100000) + 100000;
+    }
+
+    public CustomerImpl(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.iD = new Random().nextLong(200000 - 100000) + 100000;
     }
 
@@ -78,11 +84,11 @@ public class CustomerImpl implements customer {
 
     @Override
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     @Override
     public void setLastName(String lastName) {
-        LastName = lastName;
+        this.lastName = lastName;
     }
 }
