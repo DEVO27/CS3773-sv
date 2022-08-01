@@ -6,12 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Random;
 
+/**
+ * The type Account.
+ */
 @Entity
 @Table(name = "account", schema = "public")
 public class AccountImpl {
     @Id
     @Column(name = "id")
-    private Long iD;
+    private Long id;
 
     @Column(name = "email")
     private String email;
@@ -22,70 +25,128 @@ public class AccountImpl {
     @Column(name = "credit_card")
     private String creditCard;
 
+    @Column(name = "customer_id")
+    private Long customerId;
+
+    /**
+     * Instantiates a new Account.
+     *
+     * @param email      the email
+     * @param password   the password
+     * @param creditCard the credit card
+     */
     public AccountImpl(String email, String password, String creditCard) {
         this.email = email;
         this.password = password;
         this.creditCard = creditCard;
-        this.iD = new Random().nextLong(200000 - 100000) + 100000;
+        this.id = new Random().nextLong(200000 - 100000) + 100000;
     }
 
+    /**
+     * Instantiates a new Account.
+     *
+     * @param email    the email
+     * @param password the password
+     */
+    public AccountImpl(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    /**
+     * Instantiates a new Account.
+     */
     public AccountImpl() {
     }
 
+    /**
+     * Gets customer id.
+     *
+     * @return the customer id
+     */
+    public Long getCustomerId() {
+        return customerId;
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public Long getID() {
-        return iD;
+        return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param accountId the account id
+     */
     public void setID(Long accountId) {
-        this.iD = accountId;
+        this.id = accountId;
     }
 
+    /**
+     * Gets email.
+     *
+     * @return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Sets email.
+     *
+     * @param email the email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Gets password.
+     *
+     * @return the password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Sets password.
+     *
+     * @param password the password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Gets credit card.
+     *
+     * @return the credit card
+     */
     public String getCreditCard() {
         return creditCard;
     }
 
+    /**
+     * Sets credit card.
+     *
+     * @param creditCard the credit card
+     */
     public void setCreditCard(String creditCard) {
         this.creditCard = creditCard;
     }
 
-    /*@Id
-    private Long iD;
-
-    public AccountImpl(String name, String userName, String password) {
-        //super(name, userName, password);
-        this.iD = new Random().nextLong(20000 - 10000) + 10000;
+    @Override
+    public String toString() {
+        return "AccountImpl {" +
+                "iD=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", creditCard='" + creditCard + '\'' +
+                '}';
     }
-
-    public AccountImpl(String userName, String password) {
-        //super(userName, password);
-        this.iD = new Random().nextLong(20000 - 10000) + 10000;
-    }
-
-    public AccountImpl() {
-    }
-
-
-    public Long getiD() {
-        return iD;
-    }
-
-    public void setiD(Long iD) {
-        this.iD = iD;
-    } */
 }
