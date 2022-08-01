@@ -1,9 +1,18 @@
 package application.model.CommonSV;
 
 public class ResponseDetail {
-    String status;
+    private String status;
+    private Object classInfo;
     private String message;
     private String Action;
+
+    public Object getClassInfo() {
+        return classInfo;
+    }
+
+    public void setClassInfo(Object classInfo) {
+        this.classInfo = classInfo;
+    }
 
     public String getStatus() {
         return status;
@@ -32,12 +41,14 @@ public class ResponseDetail {
     @Override
     public String toString() {
         return String.format("""
-                        { Message = '%s'
+                        [ Message = '%s'
                           Status = '%s'
                           Action = '%s'
-                        }""",
+                          Class: %s
+                        ]""",
                 getMessage(),
                 getStatus(),
-                getStatus());
+                getStatus(),
+                getClassInfo().toString());
     }
 }
